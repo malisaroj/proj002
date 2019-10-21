@@ -34,6 +34,9 @@ class Query(object):
 
     def resolve_all_employees(self, info, **kwargs):
         # We can easily optimize query count in the resolve method
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
         return Employee.objects.all()
 
 
@@ -48,6 +51,9 @@ class CreateTitle(graphene.Mutation):
         title = Title(
             title_name=input.get('title_name')
         )
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')        
         title.save()
         # Notice we return an instance of this mutation
         return CreateTitle(title=title)
@@ -69,6 +75,9 @@ class CreateEmployee(graphene.Mutation):
             employee_title=Title.objects.get(
                 title_name=input.get('employee_title'))
         )
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
         employee.save()
         # Notice we return an instance of this mutation
         return CreateEmployee(employee=employee)
@@ -92,6 +101,9 @@ class UpdateEmployee(graphene.Mutation):
         employee.employee_title = Title.objects.get(
             title_name=input.get('employee_title')
         )
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
         employee.save()
         return UpdateEmployee(employee=employee)
 
@@ -103,6 +115,9 @@ class DeleteEmployee(graphene.Mutation):
     def mutate(self, info, **input):
         employee = Employee.objects.get(
             pk=(input.get('id')))
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in!')
         employee.delete()        
         return DeleteEmployee(employee=employee)
 
