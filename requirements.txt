@@ -13,7 +13,7 @@ graphql-core==2.2.1
 graphql-relay==2.0.0
 idna==2.8
 Pillow==6.2.0
-pipenv==2018.11.26
+pipenv==2022.1.8
 promise==2.2.1
 psycopg2==2.8.4
 pycodestyle==2.5.0
