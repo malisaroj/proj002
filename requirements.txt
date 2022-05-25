@@ -17,7 +17,7 @@ pipenv==2018.11.26
 promise==2.2.1
 psycopg2==2.8.4
 pycodestyle==2.5.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 pytz==2019.2
 requests==2.22.0
 Rx==1.6.1
